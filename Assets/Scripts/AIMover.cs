@@ -26,6 +26,21 @@ public class AIMover : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
+
+            if (life <= 0) {
+
+                rb.freezeRotation = false;
+
+                rb.AddForce(Vector3.up * 30f);
+
+                if (transform.position.y > 100f || transform.position.y < -10f) {
+                    Destroy(gameObject);
+                }
+
+                return;
+
+            }
+
             dirPlayer = player.position - transform.position;
             dirPlayer = dirPlayer.normalized;
 
@@ -47,12 +62,11 @@ public class AIMover : MonoBehaviour
             Animator anim = GetComponent<Animator>();
             if (anim != null)
             {
-                anim.SetFloat("Speed", rb.velocity.magnitude);
+                // anim.SetFloat("Speed", rb.velocity.magnitude);
             }
         }
 
-        if (life <= 0)
-            Destroy(gameObject);
+        
     }
 
     private void OnDrawGizmos()
