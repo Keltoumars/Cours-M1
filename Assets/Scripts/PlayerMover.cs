@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMover : MonoBehaviour {
     public Transform objectToThrow;
     public Transform playerCam;
+
+    public Button restartGame;
 
     public float mouseSensivityX;
     public float mouseSensivityY;
@@ -45,6 +48,12 @@ public class PlayerMover : MonoBehaviour {
             obj.position = playerCam.position + playerCam.forward;
             obj.GetComponent<Rigidbody>().AddForce(playerCam.forward * 40, ForceMode.Impulse);
         }
+
+        //Recommencer le niveau
+        if (transform.position.y <= -15f) {
+            restartGame.gameObject.SetActive(true);
+        }
+
     }
 
     // Update is called once per frame

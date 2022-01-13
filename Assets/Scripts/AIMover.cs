@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class AIMover : MonoBehaviour
 {
-    [Tooltip("Vitesse de déplacement"), Range(1, 15)]
+    [Tooltip("Vitesse de déplacement")]
     public float linearSpeed = 6;
     [Tooltip("Vitesse de rotation"), Range(1, 5)]
     public float angularSpeed = 1;
 
+    [SerializeField]
     private Transform player;
 
     public Vector3 dirPlayer;
@@ -56,7 +57,7 @@ public class AIMover : MonoBehaviour
 
             if (Mathf.Abs(angle) < 10 && rb.velocity.magnitude < 3)
             {
-                rb.AddForce(transform.forward * 40);
+                rb.AddForce(transform.forward * linearSpeed);
             }
 
             Animator anim = GetComponent<Animator>();
