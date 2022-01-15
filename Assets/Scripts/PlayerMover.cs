@@ -46,7 +46,8 @@ public class PlayerMover : MonoBehaviour {
         if (Input.GetButtonDown("Fire1")) {
             Transform obj = GameObject.Instantiate<Transform>(objectToThrow);
             obj.position = playerCam.position + playerCam.forward;
-            obj.GetComponent<Rigidbody>().AddForce(playerCam.forward * 40, ForceMode.Impulse);
+            obj.rotation = transform.rotation;
+            obj.GetComponent<Rigidbody>().AddForce(playerCam.forward * 20, ForceMode.Impulse);
         }
 
         //Recommencer le niveau
@@ -87,4 +88,12 @@ public class PlayerMover : MonoBehaviour {
             isGrounded = false;
         }
     }
+
+    public void OnCollisionEnter(Collision collision) {
+        AIMover other = collision.gameObject.GetComponent<AIMover>();
+        if (other != null) {
+            other.life -= 1;
+        }
+    }
+
 }

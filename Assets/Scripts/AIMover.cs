@@ -51,20 +51,24 @@ public class AIMover : MonoBehaviour
 
             if (angle > 4)
                 rb.AddTorque(transform.up * -5);
-            else
-            if (angle < -4)
+            else if (angle < -4)
                 rb.AddTorque(transform.up * 5);
 
-            if (Mathf.Abs(angle) < 10 && rb.velocity.magnitude < 3)
-            {
-                rb.AddForce(transform.forward * linearSpeed);
+
+            // Rester a distance
+            if (Vector3.Distance(player.position, transform.position) > 10f) {
+
+                if (Mathf.Abs(angle) < 10 && rb.velocity.magnitude < 3) {
+                    rb.AddForce(transform.forward * linearSpeed);
+                }
+
             }
 
             Animator anim = GetComponent<Animator>();
-            if (anim != null)
-            {
+            if (anim != null) {
                 // anim.SetFloat("Speed", rb.velocity.magnitude);
             }
+
         }
 
         
